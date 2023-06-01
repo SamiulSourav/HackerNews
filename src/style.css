@@ -1,0 +1,33 @@
+a{
+    color: black;
+    text-decoration: none;
+}
+a:hover{
+    background-color: rgb(184, 184, 184);
+}
+nav{
+    color: darkblue;
+    background-color:aqua;
+}
+li {
+    border-bottom: 1px solid purple;
+    padding: 10px;
+}
+
+li > ul {
+    border-top: 1px solid purple;
+}
+
+li > ul > li:last-child {
+    border: none;
+}
+button{
+    margin: 0px 5px;
+}
+button:hover{
+    cursor: pointer;
+    background-color: darkgray;
+}
+body{
+    background-color: rgb(225, 225, 225);
+}
