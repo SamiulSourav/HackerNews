@@ -35,10 +35,12 @@ import ConvertTime from './ConvertTime.vue';
 
 <template>
     <span v-if="called === true"> 
-        {{ obj.text }} 
+        <span v-html="obj.text"> </span>
+        <!-- {{ obj.text }}  -->
         <br> by <router-link style="font-style: italic; color:rgb(51, 51, 255)" :to="`/user/${obj.by}`">
             {{ obj.by }} <br>
         </router-link> 
+        <ConvertTime :time="obj.time"/>
         <div v-if="len > 0">
             <button v-if="showReply === false" style="background-color: rgba(9, 255, 255, 0.201);" @click="toggleReply"> 
                 {{ len }} reply 
@@ -48,7 +50,6 @@ import ConvertTime from './ConvertTime.vue';
             </button>
             <div v-if="showReply === true"> <GetComments :commentArray="obj.kids"/> </div>
         </div>
-        <ConvertTime :time="obj.time"/>
     </span>
     <span v-else> loading </span>
     <!-- -> {{ obj }} -->
