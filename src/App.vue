@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <router-link to="/" class="home">Home</router-link> |
+    <router-link to="/" :class="{active: $route.path === '/'}" class="home">Home</router-link> |
     <router-link :to="'/newstories'" :class="{ active: $route.path === '/newstories' }" class="tab padding-right-8"> New
     </router-link>
     <router-link :to="'/topstories'" :class="{ active: $route.path === '/topstories' }" class="tab padding-right-8"> Top
