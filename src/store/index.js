@@ -8,6 +8,8 @@ export default createStore({
         show: [],
         job: [],
         best: [],
+        items: {},
+        users: {},
     },
     mutations: {
         setNew(state, payload) {
@@ -27,6 +29,12 @@ export default createStore({
         },
         setBest(state, payload) {
             state.best = payload;
+        },
+        setItem(state, payload) {
+            state.items[payload.id] = payload;
+        },
+        setUser(state, payload) {
+            state.users[payload.id] = payload;
         },
     },
     actions: {
@@ -100,6 +108,30 @@ export default createStore({
                 console.error('failed', error);
             }
         },
+        async fetchItem({ commit, state }, id) {
+            try {
+                if (!state.items[id]) {
+                    const response = await axios.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`);
+                    commit('setItem', response.data);
+                }
+                return state.items[id];
+            }
+            catch (error) {
+                console.error('failed', error);
+            }
+        },
+        async fetchUser({ commit, state }, id) {
+            try {
+                if (!state.users[id]) {
+                    const response = await axios.get(`https://hacker-news.firebaseio.com/v0/user/${id}.json?print=pretty`);
+                    commit('setUser', response.data);
+                }
+                return state.users[id];
+            }
+            catch (error) {
+                console.error('failed', error);
+            }
+        },
     },
     getters: {
         getNew(state) {
@@ -119,6 +151,12 @@ export default createStore({
         },
         getBest(state){
             return state.best;
+        },
+        getItem: (state) => (id) => {
+            return state.items[id];
+        },
+        getUser: (state) => (id) => {
+            return state.users[id];
         }
     },
 });

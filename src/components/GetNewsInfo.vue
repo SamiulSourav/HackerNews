@@ -1,22 +1,21 @@
 <script setup>
-    import axios from 'axios';
     import { ref } from 'vue';
+import { useStore } from 'vuex';
 import GetComments from './GetComments.vue';
 import ConvertTime from './ConvertTime.vue';
+    const store = useStore();
     const news = ref({});
     const props = defineProps({
         id: Number
     })
     const id = props.id;
 
-    let url = `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`;
     let len = ref();
     let called = ref(false);
     let commentShow = ref(false);
     const getNews = async() => {
         try{
-            const response = await axios.get(url);
-            news.value = response.data;
+            news.value = await store.dispatch('fetchItem', id);
             if(news.value.kids === undefined) len.value = 0;
             else len.value = news.value.kids.length;
             called.value = true;
