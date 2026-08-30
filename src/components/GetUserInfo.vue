@@ -1,18 +1,11 @@
 <script setup>
-    import axios from 'axios';
     import { ref } from 'vue';
-    axios
+    import { useStore } from 'vuex';
+    const store = useStore();
     const props = defineProps({
         id: String
     })
-    
-    function getUrl(id) {
-        let baseUlr = 'https://hacker-news.firebaseio.com/v0{/user/jl}.json?print=pretty';
-        var url = baseUlr.replace('{/user/jl}', id);
-        return url;
-    }
-    const url = getUrl(props.id);
-    console.log(url);
+    const id = props.id.replace('/user/', '');
     const user = ref({
         about: '',
         created: '',
@@ -23,8 +16,7 @@
 
     const getUser = async() => {
         try{
-            const response = await axios.get(url);
-            user.value = response.data;
+            user.value = await store.dispatch('fetchUser', id);
         }
         catch(error) {
             console.error('Failed to fetch user:', error);
