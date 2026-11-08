@@ -43,8 +43,8 @@ function right() {
     </div>
     <div style="align-items: center; display: flex; flex-direction: column;  justify-content: center;">
         <h4>Today's best news:</h4>
-        <div>
-            <ul>
+        <div class="news-list-wrapper">
+            <ul class="news-list">
                 <li v-if="gotData === false">Getting Data ...</li>
                 <li v-else v-for="id in page[pageNo]" :key="id">
                     <GetNewsInfo :id="id" />
