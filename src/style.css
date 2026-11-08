@@ -36,3 +36,15 @@ button:hover {
 body {
   background-color: rgb(225, 225, 225);
 }
+.news-list-wrapper {
+  width: 100%;
+  max-width: 900px;
+}
+.news-list {
+  width: 100%;
+  max-width: 900px;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  list-style: none;
+  padding-left: 0;
+}
